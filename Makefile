@@ -1,8 +1,10 @@
 NAME 	:= so_long
-CFLAGS 	:= -Wall -Wextra -Werror
+CC		:= gcc
+CFLAGS 	:= -Wall -Wextra -Werror -Imlx -g -fsanitize=address
 LIBMLX 	:= ./MLX42
+LIBFT	:= ./LIBFT
 
-HEADERS := -I ./include -I $(LIBMLX)/include
+HEADERS := -I ./include -I $(LIBMLX)/include -I libft
 LIBS	:= $(LIBMLX)/libmlx42.a -ldl -lglfw -pthread -lm
 SRCS	:= $(shell find ./src -iname "*.c")
 OBJS	:= ${SRCS:.c=.o}
@@ -18,6 +20,9 @@ all: libmlx $(NAME)
 
 libmlx:
 	@$(MAKE) -C $(LIBMLX)
+
+libft:
+	@$(MAKE) -C $(LIBFT)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)

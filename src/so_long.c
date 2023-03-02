@@ -6,17 +6,18 @@
 /*   By: izaitcev <izaitcev@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/25 16:17:39 by izaitcev      #+#    #+#                 */
-/*   Updated: 2023/02/25 19:29:17 by izaitcev      ########   odam.nl         */
+/*   Updated: 2023/03/01 20:26:21 by izaitcev      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+mlx_image_t		*g_img;
+
 void	move_hook(void *param)
 {
 	mlx_t			*mlx;
 	int				speed;
-	mlx_image_t		*g_img;
 	// int		new_pos = 0;
 
 	mlx = param;

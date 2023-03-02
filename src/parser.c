@@ -6,7 +6,7 @@
 /*   By: izaitcev <izaitcev@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 17:42:04 by izaitcev      #+#    #+#                 */
-/*   Updated: 2023/02/27 20:08:18 by izaitcev      ########   odam.nl         */
+/*   Updated: 2023/03/01 20:22:45 by izaitcev      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	save_map(t_so_long *data, int *fd)
 {
 	int		rd;
 	char	buffer;
-	int		i;
+	size_t	i;
 
 	data->map_length = 1;
 	data->map_width = 0;
@@ -56,6 +56,8 @@ void	save_map(t_so_long *data, int *fd)
 	i = 0;
 	while (i < data->map_length)
 	{
+		// write(1, "hi\n", 3);
+		printf("%s\n", get_next_line(*fd));
 		data->map_content[i] = get_next_line(*fd);
 		i++;
 	}
@@ -64,7 +66,8 @@ void	save_map(t_so_long *data, int *fd)
 // print an error and exit the program
 void	print_error(const char *error)
 {
-	ft_printf(error);
+	// ft_printf(error); //TODO: MAKE PRINTF WORK WITH LIBFT
+	printf("%s", error);
 	exit(0);
 }
 
@@ -92,8 +95,8 @@ bool	parsing(t_so_long *data, int argc, char **argv)
 	fd = open(data->map_name, O_RDONLY);
 	if (fd < 0)
 		print_error("Failed to open the map.\n");
-	save_map(&data, &fd);
+	save_map(data, &fd);
 	close(fd);
-	process_map(&data);
+	process_map(data);
 	return (true);
 }

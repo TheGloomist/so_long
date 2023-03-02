@@ -1,10 +1,10 @@
 #include "so_long.h"
 
-// is it possible to solve a given map?
-bool check_if_solvable(t_so_long *data)
-{
+// // is it possible to solve a given map?
+// bool check_if_solvable(t_so_long *data)
+// {
 
-}
+// }
 
 // are all characters valid, is there 1 exit, at least one collectable, 1 player?
 void	check_characters(t_so_long *data)
@@ -57,7 +57,7 @@ void	check_walls(t_so_long *data)
 	pos = 0;
 	while (pos < data->map_length)
 	{
-		if (map[pos][0] != '1' || map[data->map_width - 1] != '1')
+		if (map[pos][0] != '1' || map[pos][data->map_width - 1] != '1')
 			print_error("Invalid map. Must be walled off.\n");
 		pos++;
 	}
@@ -67,10 +67,10 @@ void	check_walls(t_so_long *data)
 // go through the map and check if all the requirements are met
 void	process_map(t_so_long *data)
 {
-	check_if_rectangular(&data);
-	check_walls(&data);
-	check_characters(&data);
-	check_if_solvable(&data);
+	check_if_rectangular(data);
+	check_walls(data);
+	check_characters(data);
+	// check_if_solvable(&data);
 
 }
 

@@ -6,13 +6,14 @@
 #    By: izaitcev <izaitcev@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/30 14:54:38 by izaitcev      #+#    #+#                  #
-#    Updated: 2022/12/07 19:16:21 by izaitcev      ########   odam.nl          #
+#    Updated: 2023/03/02 17:47:00 by izaitcev      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
+HEADERS := -I ./get_next_line
 
 SRC = ft_isalpha.c \
 	ft_isdigit.c \
@@ -48,6 +49,9 @@ SRC = ft_isalpha.c \
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \
 	ft_putnbr_fd.c \
+	get_next_line/get_next_line.c \
+	get_next_line/get_next_line_utils.c \
+
 
 SRC_BONUS = ft_lstnew_bonus.c \
 		ft_lstadd_front_bonus.c \
@@ -68,16 +72,13 @@ else
 COMPILE_OBJS = $(OBJ)
 endif
 
-all: $(NAME) gnl printf
-
-# gnl:
-# 	$(MAKE) -C ./get_next_line
+all: $(NAME) printf
 
 printf:
 	$(MAKE) -C ./ft_printf
 
 %.o: %.c 
-	$(CC) $(CFLAGS) -c -o $@ $< 
+	$(CC) $(CFLAGS) -c -o $@ $< $(HEADERS)
 
 $(NAME): $(COMPILE_OBJS)
 	ar rc $(NAME) $(COMPILE_OBJS)
@@ -87,9 +88,11 @@ bonus:
 	
 clean:
 	rm -f $(OBJ) $(BONUS_OBJ)
+	$(MAKE) -C ./ft_printf clean
 
 fclean: clean
 	rm -f $(NAME)
+	$(MAKE) -C ./ft_printf fclean
 
 re: fclean all
 

@@ -1,11 +1,11 @@
 NAME 	:= so_long
 CC		:= gcc
-CFLAGS 	:= -Wall -Wextra -Werror -Imlx -g -fsanitize=address
+CFLAGS 	:= -Wall -Wextra -Werror -Imlx
 LIBMLX 	:= ./MLX42
 LIBFT	:= ./LIBFT
 
-HEADERS := -I ./include -I $(LIBMLX)/include -I libft
-LIBS	:= $(LIBMLX)/libmlx42.a -ldl -lglfw -pthread -lm
+HEADERS := -I ./include -I $(LIBMLX)/include -I $(LIBFT)
+LIBS	:= $(LIBMLX)/libmlx42.a -ldl -lglfw -pthread -lm $(LIBFT)/libft.a
 SRCS	:= $(shell find ./src -iname "*.c")
 OBJS	:= ${SRCS:.c=.o}
 
@@ -25,7 +25,7 @@ libft:
 	@$(MAKE) -C $(LIBFT)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
+	$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) 
 
 $(NAME): $(OBJS)
 	$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
@@ -33,10 +33,13 @@ $(NAME): $(OBJS)
 clean:
 	@rm -f $(OBJS)
 	@$(MAKE) -C $(LIBMLX) clean
+	@$(MAKE) -C $(LIBFT) clean
+
 
 fclean: clean
 	@rm -f $(NAME)
 	@$(MAKE) -C $(LIBMLX) fclean
+	@$(MAKE) -C $(LIBFT) fclean
 
 re: clean all
 

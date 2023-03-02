@@ -6,13 +6,15 @@
 /*   By: izaitcev <izaitcev@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/25 19:09:19 by izaitcev      #+#    #+#                 */
-/*   Updated: 2022/04/27 19:08:36 by izaitcev      ########   odam.nl         */
+/*   Updated: 2023/03/02 17:27:57 by izaitcev      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <stdlib.h>
+# include "get_next_line/get_next_line.h"
+# include "printf.h"
 
 typedef struct s_list
 {
@@ -63,5 +65,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void*));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void *));
+char	*get_next_line(int fd);
+int		ft_printf(const char *format, ...);
 
 #endif

@@ -6,13 +6,15 @@
 /*   By: izaitcev <izaitcev@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/25 16:17:47 by izaitcev      #+#    #+#                 */
-/*   Updated: 2023/02/27 19:43:23 by izaitcev      ########   odam.nl         */
+/*   Updated: 2023/03/01 20:11:32 by izaitcev      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+
+#include <stdio.h>
 
 # include <stdlib.h>
 # include <string.h>

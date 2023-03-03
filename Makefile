@@ -1,8 +1,8 @@
 NAME 	:= so_long
 CC		:= gcc
-CFLAGS 	:= -Wall -Wextra -Werror -Imlx
+CFLAGS 	:= -Wall -Wextra -Werror -Imlx -g -fsanitize=address
 LIBMLX 	:= ./MLX42
-LIBFT	:= ./LIBFT
+LIBFT	:= ./LIBFT_folder
 
 HEADERS := -I ./include -I $(LIBMLX)/include -I $(LIBFT)
 LIBS	:= $(LIBMLX)/libmlx42.a -ldl -lglfw -pthread -lm $(LIBFT)/libft.a
@@ -16,7 +16,7 @@ else
 	LIBS += -ldl
 endif
 
-all: libmlx $(NAME)
+all: libmlx libft $(NAME)
 
 libmlx:
 	@$(MAKE) -C $(LIBMLX)
@@ -28,7 +28,7 @@ libft:
 	$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) 
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 
 clean:
 	@rm -f $(OBJS)
@@ -43,4 +43,4 @@ fclean: clean
 
 re: clean all
 
-.PHONY: all, libmlx, clean, fclean, re
+.PHONY: all, libmlx, libft, clean, fclean, re

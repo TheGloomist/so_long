@@ -27,17 +27,19 @@ void	check_characters(t_so_long *data)
 void	check_if_rectangular(t_so_long *data)
 {
 	size_t	len;
-	size_t	line;
+	size_t	i;
 
-	line = data->map_length - 1;
-	while (line > 0)
+	i = 0;
+	while (i < data->map_length)
 	{
-		len = strlen(data->map_content[line]);
-		if (len != data->map_width)
+		len = strlen(data->map_content[i]);
+		if (len != data->map_width){
+			// printf("%zu, %zu on line %zu\n", data->map_width, len, i);
+			// printf("%s", data->map_content[i]);
 			print_error("Invalid map. Must be rectangular.\n");
-		line--;
+		}
+		i++;
 	}
-	return ;
 }
 
 // is map walled off and rectangular?
@@ -78,7 +80,7 @@ void	process_map(t_so_long *data)
 
 // [] - check for invalid characters
 
-// [x] - check if the map is rectangular (strs are equal length)
+// [X] - check if the map is rectangular (strs are equal length)
 
 // [x] - check if there is a requered amount of valid characters (1 exit, at least 1 collectable, 1 player)
 

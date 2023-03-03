@@ -6,13 +6,13 @@
 #    By: izaitcev <izaitcev@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/30 14:54:38 by izaitcev      #+#    #+#                  #
-#    Updated: 2023/03/02 17:47:00 by izaitcev      ########   odam.nl          #
+#    Updated: 2023/03/03 18:06:15 by izaitcev      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CC = gcc 
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 HEADERS := -I ./get_next_line
 
 SRC = ft_isalpha.c \
@@ -49,8 +49,8 @@ SRC = ft_isalpha.c \
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \
 	ft_putnbr_fd.c \
-	get_next_line/get_next_line.c \
-	get_next_line/get_next_line_utils.c \
+	get_next_line.c \
+	get_next_line_utils.c \
 
 
 SRC_BONUS = ft_lstnew_bonus.c \

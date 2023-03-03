@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_next_line.h                                    :+:    :+:            */
+/*   get_next_line_utils.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: izaitcev <izaitcev@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/08/13 14:16:06 by izaitcev      #+#    #+#                 */
-/*   Updated: 2022/09/21 17:02:16 by izaitcev      ########   odam.nl         */
+/*   Created: 2022/08/13 14:15:58 by izaitcev      #+#    #+#                 */
+/*   Updated: 2023/03/03 18:29:23 by izaitcev      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "get_next_line.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+size_t	protected_strlen(const char *str)
+{
+	size_t	ret;
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-
-char	*get_next_line(int fd);
-int		find_newline(char *line);
-size_t	ft_strlen(const char *str);
-
-#endif
+	ret = 0;
+	if (!str)
+		return (ret);
+	while (str[ret] != '\0')
+		ret++;
+	return (ret);
+}

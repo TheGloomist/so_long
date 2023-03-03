@@ -6,7 +6,7 @@
 /*   By: izaitcev <izaitcev@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 17:42:04 by izaitcev      #+#    #+#                 */
-/*   Updated: 2023/03/01 20:22:45 by izaitcev      ########   odam.nl         */
+/*   Updated: 2023/03/03 21:02:24 by izaitcev      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,18 @@ void	save_map(t_so_long *data, int *fd)
 		if (data->map_length == 1)
 			data->map_width++;
 	}
-	data->map_content = (char **)malloc(data->map_length * sizeof(char *));
+	data->map_content = (char **)malloc((data->map_length) * sizeof(char *));
 	close(*fd);
 	*fd = open(data->map_name, O_RDONLY);
 	if (*fd < 0)
 		print_error("Failed to open the map.\n");
 	i = 0;
+	// printf("map length is: %zu", data->map_length);
 	while (i < data->map_length)
 	{
-		// write(1, "hi\n", 3);
-		printf("%s\n", get_next_line(*fd));
 		data->map_content[i] = get_next_line(*fd);
+		if (ft_strlen(data->map_content[i]) == data->map_width + 1)
+			data->map_content[i][data->map_width] = '\0';
 		i++;
 	}
 }

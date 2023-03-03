@@ -6,7 +6,7 @@
 /*   By: izaitcev <izaitcev@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 14:15:50 by izaitcev      #+#    #+#                 */
-/*   Updated: 2022/09/21 17:02:47 by izaitcev      ########   odam.nl         */
+/*   Updated: 2023/03/03 18:28:55 by izaitcev      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ char	*allocate_line(char *old_line, const char *new_part, int nl)
 	char	*expanded_line;
 
 	if (nl == -1)
-		len = ft_strlen(old_line) + ft_strlen(new_part);
+		len = protected_strlen(old_line) + protected_strlen(new_part);
 	else
-		len = ft_strlen(old_line) + nl;
+		len = protected_strlen(old_line) + nl;
 	if (len == 0)
 		return (NULL);
 	expanded_line = (char *) malloc(sizeof(char) * (len + 1));

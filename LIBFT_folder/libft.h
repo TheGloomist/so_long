@@ -6,14 +6,14 @@
 /*   By: izaitcev <izaitcev@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/25 19:09:19 by izaitcev      #+#    #+#                 */
-/*   Updated: 2023/03/02 17:27:57 by izaitcev      ########   odam.nl         */
+/*   Updated: 2023/03/03 16:32:48 by izaitcev      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <stdlib.h>
-# include "get_next_line/get_next_line.h"
+# include "get_next_line.h"
 # include "printf.h"
 
 typedef struct s_list

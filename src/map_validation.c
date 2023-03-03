@@ -9,19 +9,30 @@
 // are all characters valid, is there 1 exit, at least one collectable, 1 player?
 void	check_characters(t_so_long *data)
 {
-	char	**map;
 	size_t	pos_len;
-	size_t	pos_w;
+	size_t	i;
+	char	**map;
 
-	map = data->map_content;
 	pos_len = 0;
-	pos_w = 0;
+	map = data->map_content;
 	if (data->count_collectables < 1 || data->count_player != 1 || data->count_exits != 1)
 		print_error("Invalid map. Must contain 1 exit, 1 player character and at least 1 collectable.\n");
-// 	while (pos_len < data->map_length || pos_w < data->map_width)
-// 	{
-// 		if (map[pos_len][pos_w] == 'P' )
-// 	}
+	while (pos_len <= data->map_length)
+	{
+		i = 0;
+		while (i < data->map_width)
+		{
+			if (map[pos_len][i] == '1' || map[pos_len][i] == '0'|| map[pos_len][i] == 'P'|| map[pos_len][i] == 'E'|| map[pos_len][i] == 'C')
+			{
+				// printf("%c ", map[pos_len][i]);
+				i++;
+			}
+			else
+				print_error("Invalid map. Contains unknown characters.\n");
+		}
+		// printf("%zu ", pos_len);
+		pos_len++;
+	}
 }
 
 void	check_if_rectangular(t_so_long *data)

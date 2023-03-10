@@ -6,7 +6,7 @@
 /*   By: izaitcev <izaitcev@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/25 16:17:39 by izaitcev      #+#    #+#                 */
-/*   Updated: 2023/03/01 20:26:21 by izaitcev      ########   odam.nl         */
+/*   Updated: 2023/03/10 17:24:49 by izaitcev      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	move_hook(void *param)
 int	main(int argc, char **argv)
 {
 	t_so_long		data;
-	mlx_image_t		*g_img;
+	// mlx_image_t		*g_img;
 	mlx_texture_t	*foxey;
 
 	data.mlx = mlx_init(WIDTH, HEIGHT, "so_long", true);

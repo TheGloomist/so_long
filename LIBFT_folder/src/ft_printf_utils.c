@@ -6,13 +6,13 @@
 /*   By: izaitcev <izaitcev@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/18 21:56:20 by izaitcev      #+#    #+#                 */
-/*   Updated: 2022/07/16 12:03:36 by izaitcev      ########   odam.nl         */
+/*   Updated: 2023/03/07 18:26:17 by izaitcev      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_strlen(char *str)
+int	prntf_strlen(char *str)
 {
 	size_t	i;
 
@@ -28,7 +28,7 @@ int	print_str(char *str)
 
 	if (!str)
 		return (write(1, "(null)", 6));
-	str_len = ft_strlen(str);
+	str_len = prntf_strlen(str);
 	return (write(1, str, str_len));
 }
 

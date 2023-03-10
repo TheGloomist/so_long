@@ -6,7 +6,7 @@
 /*   By: izaitcev <izaitcev@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 17:42:04 by izaitcev      #+#    #+#                 */
-/*   Updated: 2023/03/03 21:02:24 by izaitcev      ########   odam.nl         */
+/*   Updated: 2023/03/07 18:39:42 by izaitcev      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	save_map(t_so_long *data, int *fd)
 	while (i < data->map_length)
 	{
 		data->map_content[i] = get_next_line(*fd);
-		if (ft_strlen(data->map_content[i]) == data->map_width + 1)
+		if (protected_strlen(data->map_content[i]) == data->map_width + 1)
 			data->map_content[i][data->map_width] = '\0';
 		i++;
 	}
@@ -67,8 +67,7 @@ void	save_map(t_so_long *data, int *fd)
 // print an error and exit the program
 void	print_error(const char *error)
 {
-	// ft_printf(error); //TODO: MAKE PRINTF WORK WITH LIBFT
-	printf("%s", error);
+	ft_printf("%s", error);
 	exit(0);
 }
 
@@ -77,7 +76,7 @@ bool	extension_check(char **argv)
 {
 	int	len;
 
-	len = strlen(argv[1]); // TODO: replace with ft_strlen
+	len = protected_strlen(argv[1]);
 	if (len < 4 || strcmp((&argv[1][len - 4]), ".ber") != 0) // TODO: replace with ft_strcmp 
 		return (false);
 	return (true);

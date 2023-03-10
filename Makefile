@@ -4,7 +4,7 @@ CFLAGS 	:= -Wall -Wextra -Werror -Imlx -g -fsanitize=address
 LIBMLX 	:= ./MLX42
 LIBFT	:= ./LIBFT_folder
 
-HEADERS := -I ./include -I $(LIBMLX)/include -I $(LIBFT)
+HEADERS := -I ./include -I $(LIBMLX)/include -I $(LIBFT)/include
 LIBS	:= $(LIBMLX)/libmlx42.a -ldl -lglfw -pthread -lm $(LIBFT)/libft.a
 SRCS	:= $(shell find ./src -iname "*.c")
 OBJS	:= ${SRCS:.c=.o}

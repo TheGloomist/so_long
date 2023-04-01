@@ -6,19 +6,11 @@
 /*   By: izaitcev <izaitcev@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 17:42:04 by izaitcev      #+#    #+#                 */
-/*   Updated: 2023/03/07 18:39:42 by izaitcev      ########   odam.nl         */
+/*   Updated: 2023/04/01 18:21:23 by izaitcev      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-
-// read the map, save map as an array of strings (char **)
-// TODO: 
-// [x] - count the lines (ex: amount of times gnl is called)
-// [x] - read through the map and "store" it
-
-
 
 void	save_map(t_so_long *data, int *fd)
 {
@@ -36,7 +28,7 @@ void	save_map(t_so_long *data, int *fd)
 	{
 		rd = read(*fd, &buffer, 1);
 		if (rd < 0)
-		print_error("Failed to read from the map.\n");
+			print_error("Failed to read from the map.\n");
 		if (buffer == '\n' && rd)
 			data->map_length++;
 		if (buffer == 'C')
@@ -54,7 +46,6 @@ void	save_map(t_so_long *data, int *fd)
 	if (*fd < 0)
 		print_error("Failed to open the map.\n");
 	i = 0;
-	// printf("map length is: %zu", data->map_length);
 	while (i < data->map_length)
 	{
 		data->map_content[i] = get_next_line(*fd);

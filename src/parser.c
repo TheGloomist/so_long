@@ -6,7 +6,7 @@
 /*   By: izaitcev <izaitcev@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 17:42:04 by izaitcev      #+#    #+#                 */
-/*   Updated: 2023/04/01 18:21:23 by izaitcev      ########   odam.nl         */
+/*   Updated: 2023/04/04 19:14:40 by izaitcev      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ void	print_error(const char *error)
 // check if map is stored in the .ber file
 bool	extension_check(char **argv)
 {
-	int	len;
+	size_t	len;
 
 	len = protected_strlen(argv[1]);
-	if (len < 4 || strcmp((&argv[1][len - 4]), ".ber") != 0) // TODO: replace with ft_strcmp 
+	if (len < 4 || ft_strncmp((&argv[1][len - 4]), ".ber", len) != 0)
 		return (false);
 	return (true);
 }

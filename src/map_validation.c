@@ -6,7 +6,7 @@
 /*   By: izaitcev <izaitcev@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/29 21:49:28 by izaitcev      #+#    #+#                 */
-/*   Updated: 2023/04/01 18:16:41 by izaitcev      ########   odam.nl         */
+/*   Updated: 2023/04/04 18:55:05 by izaitcev      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,12 @@ void	check_characters(t_so_long *data)
 	map = data->map_content;
 	if (data->count_collectables < 1 || data->count_player != 1 \
 	|| data->count_exits != 1)
-		print_error("Invalid map. Must contain 1 exit, 1 player character and at least 1 collectable.\n");
+	{
+		ft_printf(\
+		"Map must have 1(%i) exit, 1(%i) player character and at least 1(%i) col-table.\n",\
+		(int)data->count_exits, (int)data->count_player, (int)data->count_collectables);
+		exit(0);
+	}
 	while (y < data->map_length)
 	{
 		x = 0;

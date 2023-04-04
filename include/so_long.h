@@ -6,7 +6,7 @@
 /*   By: izaitcev <izaitcev@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/25 16:17:47 by izaitcev      #+#    #+#                 */
-/*   Updated: 2023/04/01 17:15:12 by izaitcev      ########   odam.nl         */
+/*   Updated: 2023/04/04 16:37:23 by izaitcev      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_so_long
 	t_floodfill	floodfill;
 	t_textures	images;
 	unsigned int	number_of_steps;
+	bool			allow_exit;
 } t_so_long;
 
 int		main(int argc, char **argv);

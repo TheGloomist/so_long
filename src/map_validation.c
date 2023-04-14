@@ -6,92 +6,39 @@
 /*   By: izaitcev <izaitcev@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/29 21:49:28 by izaitcev      #+#    #+#                 */
-/*   Updated: 2023/04/04 18:55:05 by izaitcev      ########   odam.nl         */
+/*   Updated: 2023/04/14 16:24:47 by izaitcev      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	flood_fill(t_so_long *data, int y, int x)
-{
-	if (data->floodfill.map_copy[y][x] == '1')
-		return ;
-	if (data->floodfill.map_copy[y][x] == 'C')
-	{
-		data->floodfill.collectables++;
-		if (data->floodfill.collectables == data->count_collectables)
-			data->floodfill.c_reachable = true;
-	}
-	if (data->floodfill.map_copy[y][x] == 'E')
-	{
-		data->floodfill.e_reachable = true;
-		return ;
-	}
-	data->floodfill.map_copy[y][x] = '1';
-	flood_fill(data, y, x + 1);
-	flood_fill(data, y, x - 1);
-	flood_fill(data, y + 1, x);
-	flood_fill(data, y - 1, x);
-}
-
-// // is it possible to solve a given map?
-void	check_if_solvable(t_so_long *data)
-{
-	size_t		y;
-
-	y = 0;
-	data->floodfill.map_copy = (char **)malloc(sizeof(char *) * data->map_length);
-	while (y < data->map_length)
-	{
-		data->floodfill.map_copy[y] = ft_strdup(data->map_content[y]);
-		y++;
-	}
-	flood_fill(data, data->character.map.y, data->character.map.x);
-	while (y > 0)
-	{
-		y--;
-		free(data->floodfill.map_copy[y]);
-	}
-	free(data->floodfill.map_copy);
-}
-
 // are all characters valid, is there 1 exit, 
 // at least one collectable, 1 player?
-void	check_characters(t_so_long *data)
+void	check_characters(t_so_long *d)
 {
-	size_t	y;
-	size_t	x;
-	char	**map;
+	t_coords	pos;
+	char		**map;
 
-	y = 0;
-	map = data->map_content;
-	if (data->count_collectables < 1 || data->count_player != 1 \
-	|| data->count_exits != 1)
+	pos.y = 0;
+	map = d->map_content;
+	while (pos.y < d->map_length)
 	{
-		ft_printf(\
-		"Map must have 1(%i) exit, 1(%i) player character and at least 1(%i) col-table.\n",\
-		(int)data->count_exits, (int)data->count_player, (int)data->count_collectables);
-		exit(0);
-	}
-	while (y < data->map_length)
-	{
-		x = 0;
-		while (x < data->map_width)
+		pos.x = 0;
+		while (pos.x < d->map_width)
 		{
-			if (map[y][x] == '1' || map[y][x] == '0')
-				x++;
-			else if (map[y][x] == 'E' || map[y][x] == 'C')
-				x++;
-			else if (map[y][x] == 'P')
+			if (map[pos.y][pos.x] == '1' || map[pos.y][pos.x] == '0' || \
+			map[pos.y][pos.x] == 'E' || map[pos.y][pos.x] == 'C')
+				pos.x++;
+			else if (map[pos.y][pos.x] == 'P')
 			{
-				data->character.map.y = y;
-				data->character.map.x = x;
-				x++;
+				d->character.map.y = pos.y;
+				d->character.map.x = pos.x;
+				pos.x++;
 			}
 			else
 				print_error("Invalid map. Contains unknown characters.\n");
 		}
-		y++;
+		pos.y++;
 	}
 }
 
@@ -139,9 +86,11 @@ void	process_map(t_so_long *data)
 {
 	check_if_rectangular(data);
 	check_walls(data);
+	if (data->count_c < 1 || data->count_player != 1 || data->count_exits != 1)
+		print_error("Map must have 1 exit, 1 player and at least 1 col-able\n");
 	check_characters(data);
 	check_if_solvable(data);
 	if (!data->floodfill.c_reachable || !data->floodfill.e_reachable)
-		print_error("Invalid map. Can't reach an exit or/and all the collectables.\n");
-	data->ramens_left = data->count_collectables;
+		print_error("Invalid map. Can't reach exit or/and all collect-s.\n");
+	data->ramens_left = data->count_c;
 }

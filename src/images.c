@@ -6,20 +6,11 @@
 /*   By: izaitcev <izaitcev@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/29 21:49:15 by izaitcev      #+#    #+#                 */
-/*   Updated: 2023/04/01 18:11:06 by izaitcev      ########   odam.nl         */
+/*   Updated: 2023/04/14 16:49:33 by izaitcev      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-t_coords	translate_map_to_screen(t_so_long *data, t_coords to_translate)
-{
-	t_coords	ret;
-
-	ret.x = to_translate.x * (data->mlx->width / data->map_width);
-	ret.y = to_translate.y * (data->mlx->height / data->map_length);
-	return (ret);
-}
 
 // pm - position on the map
 // ps - position on the screen
@@ -97,17 +88,22 @@ void	put_rest(t_so_long *data)
 
 void	get_images(t_so_long *data)
 {
-	data->images.grass = mlx_load_png("./textures/grass3.png");
-	data->images.floor = mlx_texture_to_image(data->mlx, data->images.grass);
+	t_textures	*image;
+
+	image = &(data->images);
+	image->grass = mlx_load_png("./textures/grass3.png");
+	image->floor = mlx_texture_to_image(data->mlx, image->grass);
 	put_floor(data);
-	data->images.stone = mlx_load_png("./textures/wall2.png");
-	data->images.wall = mlx_texture_to_image(data->mlx, data->images.stone);
+	image->stone = mlx_load_png("./textures/wall2.png");
+	image->wall = mlx_texture_to_image(data->mlx, image->stone);
 	put_wall(data);
-	data->images.door = mlx_load_png("./textures/exit.png");
-	data->images.exit = mlx_texture_to_image(data->mlx, data->images.door);
-	data->images.open_door = mlx_load_png("./textures/open_door.png");
-	data->images.ramen = mlx_load_png("./textures/ramen2.png");
-	data->images.collectable = mlx_texture_to_image(data->mlx, data->images.ramen);
+	image->door = mlx_load_png("./textures/exit.png");
+	image->exit = mlx_texture_to_image(data->mlx, image->door);
+	free(image->exit->pixels);
+	image->exit->pixels = image->door->pixels;
+	image->open_door = mlx_load_png("./textures/open_door.png");
+	image->ramen = mlx_load_png("./textures/ramen2.png");
+	image->collectable = mlx_texture_to_image(data->mlx, image->ramen);
 	put_rest(data);
 	data->character.screen = translate_map_to_screen(data, data->character.map);
 	get_cat_face(data);
@@ -117,9 +113,12 @@ void	get_images(t_so_long *data)
 
 void	get_cat_face(t_so_long *data)
 {
-	data->character.W_player = mlx_load_png("./textures/cat_back.png");
-	data->character.S_player = mlx_load_png("./textures/cat.png");
-	data->character.A_player = mlx_load_png("./textures/cat_a.png");
-	data->character.D_player = mlx_load_png("./textures/cat_d.png");
-	data->character.player = mlx_texture_to_image(data->mlx, data->character.S_player);
+	data->character.w_player = mlx_load_png("./textures/cat_back.png");
+	data->character.s_player = mlx_load_png("./textures/cat.png");
+	data->character.a_player = mlx_load_png("./textures/cat_a.png");
+	data->character.d_player = mlx_load_png("./textures/cat_d.png");
+	data->character.player = mlx_texture_to_image(data->mlx, \
+	data->character.s_player);
+	free(data->character.player->pixels);
+	data->character.player->pixels = data->character.s_player->pixels;
 }

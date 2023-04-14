@@ -6,23 +6,17 @@
 /*   By: izaitcev <izaitcev@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 17:42:04 by izaitcev      #+#    #+#                 */
-/*   Updated: 2023/04/04 19:14:40 by izaitcev      ########   odam.nl         */
+/*   Updated: 2023/04/14 16:31:03 by izaitcev      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	save_map(t_so_long *data, int *fd)
+void	read_map(t_so_long *data, int *fd)
 {
 	int		rd;
 	char	buffer;
-	size_t	i;
 
-	data->map_length = 1;
-	data->map_width = 0;
-	data->count_collectables = 0;
-	data->count_player = 0;
-	data->count_exits = 0;
 	rd = 1;
 	while (rd != 0)
 	{
@@ -32,7 +26,7 @@ void	save_map(t_so_long *data, int *fd)
 		if (buffer == '\n' && rd)
 			data->map_length++;
 		if (buffer == 'C')
-			data->count_collectables++;
+			data->count_c++;
 		if (buffer == 'P')
 			data->count_player++;
 		if (buffer == 'E')
@@ -40,6 +34,18 @@ void	save_map(t_so_long *data, int *fd)
 		if (data->map_length == 1)
 			data->map_width++;
 	}
+}
+
+void	save_map(t_so_long *data, int *fd)
+{
+	size_t	i;
+
+	data->map_length = 1;
+	data->map_width = 0;
+	data->count_c = 0;
+	data->count_player = 0;
+	data->count_exits = 0;
+	read_map(data, fd);
 	data->map_content = (char **)malloc((data->map_length) * sizeof(char *));
 	close(*fd);
 	*fd = open(data->map_name, O_RDONLY);
@@ -53,13 +59,6 @@ void	save_map(t_so_long *data, int *fd)
 			data->map_content[i][data->map_width] = '\0';
 		i++;
 	}
-}
-
-// print an error and exit the program
-void	print_error(const char *error)
-{
-	ft_printf("%s", error);
-	exit(0);
 }
 
 // check if map is stored in the .ber file
